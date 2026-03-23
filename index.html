@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaling Impact: Parham Zar x Sheena Lestano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Warm Orange (#f59e4e), Calming Cyan (#74ccd5), Clean White (#ffffff), Professional Gray (#1f2937) -->
+    
+    <!-- Application Structure Plan: 
+    The SPA is structured as a linear narrative "interactive pitch deck" designed for a busy executive. 
+    1. Hero: Hook & Value Prop. 
+    2. Audit: Current State vs. Opportunity. 
+    3. Solution (The Engine): Visualizes the "Content Repurposing" strategy using an interactive flow and Chart.js to show the "multiplier effect". 
+    4. Proof (Why Sheena): Highlights the unique engineering/data background and past success (1M+ views) via dynamic stat cards. 
+    5. Roadmap: An interactive 12-month calendar utilizing tabs to organize the year without overwhelming the user with text. 
+    6. Proposal: Clear, concise deliverables and next steps. 
+    This structure guides Parham logically from his problem to your specific, planned solution. 
+    -->
+    
+    <!-- Visualization & Content Choices: 
+    - The Engine -> Goal: Show how 1 video becomes 8 assets -> Viz: HTML Flowchart & Chart.js Doughnut -> Interaction: Hover effects -> Justification: Visually proves that you won't take up more of his time. 
+    - Roadmap -> Goal: Present 12-month strategy -> Viz: Interactive Tabs (Q1-Q4) -> Interaction: Click to swap content -> Justification: Condenses a massive amount of planning into a digestible, explorable format. 
+    - Proof -> Goal: Establish authority -> Viz: Number-driven HTML cards -> Justification: Appeals to a data-driven expert. 
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Relying on HTML/CSS styling and Unicode icons. 
+    -->
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            scroll-behavior: smooth;
+        }
+
+        .brand-cyan { color: #74ccd5; }
+        .bg-brand-cyan { background-color: #74ccd5; }
+        .border-brand-cyan { border-color: #74ccd5; }
+        
+        .brand-orange { color: #f59e4e; }
+        .bg-brand-orange { background-color: #f59e4e; }
+        .border-brand-orange { border-color: #f59e4e; }
+
+        /* Strict Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 300px;
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #f59e4e;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background-color: #74ccd5;
+            color: white;
+            border-color: #74ccd5;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #74ccd5; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e4e; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur shadow-sm z-50 border-b-2 border-brand-cyan">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 font-bold text-xl tracking-tight">
+                    <span class="brand-cyan">Parham Zar</span> <span class="text-gray-400 font-light px-2">|</span> SMM Strategy
+                </div>
+                <div class="hidden md:flex space-x-8 font-semibold text-sm text-gray-600">
+                    <a href="#audit" class="nav-link">The Audit</a>
+                    <a href="#engine" class="nav-link">The Engine</a>
+                    <a href="#roadmap" class="nav-link">12-Month Plan</a>
+                    <a href="#engagement" class="nav-link">Engagement</a>
+                </div>
+                <div class="md:hidden font-bold text-2xl brand-orange">≡</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto min-h-[80vh] flex flex-col justify-center">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="inline-block px-4 py-1 rounded-full bg-cyan-50 border border-brand-cyan text-brand-cyan font-bold text-sm mb-6 uppercase tracking-wider">
+                Discovery Call Pitch Deck
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Scaling Your <span class="brand-orange underline decoration-brand-cyan decoration-8 underline-offset-8">Impact</span><br>Without Scaling Your Time.
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                A data-driven content repurposing strategy designed specifically for busy experts. Turn your existing knowledge into a 30-day automated content machine.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#engine" class="bg-brand-orange hover:bg-orange-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                    Explore The Strategy
+                </a>
+            </div>
+            <p class="mt-8 text-sm text-gray-400 font-medium">Presented by Sheena Lestano • Social Media & Automation Expert</p>
+        </div>
+    </section>
+
+    <!-- The Audit Section -->
+    <section id="audit" class="py-20 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold mb-4">The Current Landscape</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">An analysis of your current Instagram presence reveals a goldmine of information waiting to be optimized for the modern algorithm.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-brand-cyan">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2"><span>📈</span> The Good</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-500 font-bold mt-1">✓</span>
+                            <span><strong>High-Value Education:</strong> Videos like the "$200,000 Surrogacy Question" position you as a top-tier authority.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-500 font-bold mt-1">✓</span>
+                            <span><strong>Strong Trust Markers:</strong> Exceptional client and surrogate testimonials that build immense credibility.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-l-4 border-brand-orange">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2"><span>🎯</span> The Opportunity</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <span class="brand-orange font-bold mt-1">→</span>
+                            <span><strong>Consistency Without Burnout:</strong> You are too busy running the agency to constantly film new content.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="brand-orange font-bold mt-1">→</span>
+                            <span><strong>Format Adaptation:</strong> We need to reach the broader audience that prefers short, snappy, engaging formats (Reels, Carousels) using what you've already created.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Engine Section -->
+    <section id="engine" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center">
+                <h2 class="text-3xl font-bold mb-4">The "Multiplier" Strategy</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We don't need to film constantly. We need to repurpose intelligently. Here is how one pillar asset fuels your entire week.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Interactive Flowchart -->
+                <div class="space-y-6">
+                    <div class="bg-cyan-50 border-2 border-brand-cyan p-6 rounded-xl text-center relative shadow-sm">
+                        <div class="text-4xl mb-2">🎥</div>
+                        <h4 class="font-bold text-lg brand-cyan">1 Pillar Video</h4>
+                        <p class="text-sm text-gray-600">(e.g., A 5-min interview or webinar)</p>
+                        <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-brand-orange text-3xl font-bold">↓</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-6">
+                        <div class="bg-white border border-gray-200 p-4 rounded-xl text-center shadow-sm hover:border-brand-orange transition duration-300">
+                            <div class="text-2xl mb-1">🎬</div>
+                            <h5 class="font-bold text-gray-800">3 Short Reels</h5>
+                            <p class="text-xs text-gray-500">Edited for high retention</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-4 rounded-xl text-center shadow-sm hover:border-brand-orange transition duration-300">
+                            <div class="text-2xl mb-1">📱</div>
+                            <h5 class="font-bold text-gray-800">1 Edu Carousel</h5>
+                            <p class="text-xs text-gray-500">Designed in Canva</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-4 rounded-xl text-center shadow-sm hover:border-brand-orange transition duration-300">
+                            <div class="text-2xl mb-1">💬</div>
+                            <h5 class="font-bold text-gray-800">1 Quote Graphic</h5>
+                            <p class="text-xs text-gray-500">For authority building</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 p-4 rounded-xl text-center shadow-sm hover:border-brand-orange transition duration-300">
+                            <div class="text-2xl mb-1">⏱️</div>
+                            <h5 class="font-bold text-gray-800">3 Story Segments</h5>
+                            <p class="text-xs text-gray-500">For daily engagement</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 flex flex-col items-center">
+                    <h3 class="text-xl font-bold mb-6 text-center">Output from 0 Hours of New Filming</h3>
+                    <div class="chart-container">
+                        <canvas id="repurposeChart"></canvas>
+                    </div>
+                    <p class="mt-6 text-center text-sm font-semibold brand-orange bg-orange-50 px-4 py-2 rounded-full">
+                        Result: 8 pieces of content per pillar asset.
+                    </p>
+                </div>
+            </div>
+
+            <!-- NEW: EDSI Website Alignment in The Engine -->
+            <div class="mt-16 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="mb-8 text-center">
+                    <h3 class="text-2xl font-bold mb-2 border-b-2 border-brand-cyan pb-2 inline-block">EDSI Website-Aligned Content Pillars</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto mt-4">Social media should drive traffic. Every piece of repurposed content will map directly back to the core funnels on the EDSI website.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl border-t-4 border-brand-cyan">
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 border-b border-gray-200 pb-2">Intended Parents</h4>
+                        <ul class="space-y-3 text-sm text-gray-600 font-medium">
+                            <li class="flex items-center gap-2"><span class="brand-cyan">→</span> Domestic & International Parents</li>
+                            <li class="flex items-center gap-2"><span class="brand-cyan">→</span> Surrogacy Process & Costs</li>
+                            <li class="flex items-center gap-2"><span class="brand-cyan">→</span> Egg Donation Process & Costs</li>
+                            <li class="flex items-center gap-2"><span class="brand-cyan">→</span> The Egg Donor Search</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border-t-4 border-brand-orange">
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 border-b border-gray-200 pb-2">Surrogates</h4>
+                        <ul class="space-y-3 text-sm text-gray-600 font-medium">
+                            <li class="flex items-center gap-2"><span class="brand-orange">→</span> "Become A Surrogate" (CTA)</li>
+                            <li class="flex items-center gap-2"><span class="brand-orange">→</span> Surrogacy Requirements</li>
+                            <li class="flex items-center gap-2"><span class="brand-orange">→</span> Step-by-Step Process</li>
+                            <li class="flex items-center gap-2"><span class="brand-orange">→</span> Surrogacy Compensation</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border-t-4 border-gray-400">
+                        <h4 class="font-bold text-lg text-gray-800 mb-3 border-b border-gray-200 pb-2">Egg Donors</h4>
+                        <ul class="space-y-3 text-sm text-gray-600 font-medium">
+                            <li class="flex items-center gap-2"><span class="text-gray-400">→</span> "Become An Egg Donor" (CTA)</li>
+                            <li class="flex items-center gap-2"><span class="text-gray-400">→</span> Egg Donor Requirements</li>
+                            <li class="flex items-center gap-2"><span class="text-gray-400">→</span> Egg Donation Process</li>
+                            <li class="flex items-center gap-2"><span class="text-gray-400">→</span> Egg Donor Compensation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12 Month Roadmap Section -->
+    <section id="roadmap" class="py-20 bg-gray-50 border-y border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold mb-4">The 12-Month Content Roadmap</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A strategically mapped calendar leveraging national awareness days to keep content highly relevant, shareable, and compassionate. Click the quarters to explore.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="switchTab('q2')" id="btn-q2" class="tab-btn active px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-cyan transition duration-200">Q2: Spring</button>
+                <button onclick="switchTab('q3')" id="btn-q3" class="tab-btn px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-cyan transition duration-200">Q3: Summer</button>
+                <button onclick="switchTab('q4')" id="btn-q4" class="tab-btn px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-cyan transition duration-200">Q4: Fall</button>
+                <button onclick="switchTab('q1')" id="btn-q1" class="tab-btn px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-brand-cyan transition duration-200">Q1: Winter</button>
+            </div>
+
+            <!-- Content Area -->
+            <div id="roadmap-content" class="bg-white p-8 rounded-2xl shadow-sm min-h-[400px]">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement & Growth Plan Section -->
+    <section id="engagement" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center">
+                <h2 class="text-3xl font-bold mb-4">Audience & Engagement Playbook</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A targeted approach to reaching the right people, triggering the algorithm for virality, and converting viewers into community members.</p>
+            </div>
+
+            <!-- Target Demographics -->
+            <h3 class="text-2xl font-bold mb-8 border-b-2 border-brand-cyan pb-2 inline-block">Target Demographics</h3>
+            <div class="grid md:grid-cols-3 gap-6 mb-16">
+                <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-brand-orange transition duration-300">
+                    <div class="text-3xl mb-3">👶</div>
+                    <h4 class="font-bold text-lg brand-cyan mb-2">Intended Parents (IPs)</h4>
+                    <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">The Goal: Build Trust & Hope</p>
+                    <p class="text-sm text-gray-600">Addressing both Domestic and <strong>International Parents</strong> searching for legal security and transparent <strong>Surrogacy/Egg Donation Costs</strong>. <br><br><strong>Content Focus:</strong> Process guides, cost breakdowns, and navigating the <strong>Egg Donor Search</strong>.</p>
+                </div>
+                <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-brand-orange transition duration-300">
+                    <div class="text-3xl mb-3">🤰</div>
+                    <h4 class="font-bold text-lg brand-cyan mb-2">Prospective Surrogates</h4>
+                    <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">The Goal: Safety & Community</p>
+                    <p class="text-sm text-gray-600">Searching for a supportive agency that clearly outlines <strong>Surrogacy Requirements</strong> and offers competitive, transparent <strong>Surrogacy Compensation</strong>. <br><br><strong>Content Focus:</strong> "Become a Surrogate" testimonials, matching process, and compensation facts.</p>
+                </div>
+                <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md hover:border-brand-orange transition duration-300">
+                    <div class="text-3xl mb-3">🥚</div>
+                    <h4 class="font-bold text-lg brand-cyan mb-2">Egg Donors</h4>
+                    <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">The Goal: Clarity & Ease</p>
+                    <p class="text-sm text-gray-600">Younger demographic seeking quick, digestible facts about <strong>Egg Donor Requirements</strong>, the medical <strong>Process</strong>, and <strong>Egg Donor Compensation</strong>. <br><br><strong>Content Focus:</strong> "Become an Egg Donor" guides, health qualifications, and quick-tip carousels.</p>
+                </div>
+            </div>
+
+            <!-- Growth Tactics -->
+            <h3 class="text-2xl font-bold mb-8 border-b-2 border-brand-orange pb-2 inline-block">The Growth & Virality Tactics</h3>
+            <div class="space-y-6">
+                <div class="flex flex-col md:flex-row gap-6 bg-gray-50 p-6 rounded-2xl border-l-4 border-brand-cyan items-start">
+                    <div class="bg-white p-4 rounded-full shadow-sm text-2xl">🚀</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Going Viral: The Emotional & Educational Hook</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">The algorithm heavily favors extreme emotion and high-value "myth-busting". We will mine your existing footage for the most emotionally resonant clips (e.g., Intended Parents holding their baby for the first time) and controversial/high-value topics (e.g., Why surrogacy costs what it does). We will edit these specifically for high-retention to trigger algorithm pushes to the Explore page.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 bg-gray-50 p-6 rounded-2xl border-l-4 border-brand-orange items-start">
+                    <div class="bg-white p-4 rounded-full shadow-sm text-2xl">💬</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Driving Engagement: Interactive Storytelling</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Engagement is the metric that trains Instagram to show your content to your own followers. We will utilize IG Stories daily with interactive stickers: Weekly "Ask Parham" Q&A boxes, polls on common surrogacy misconceptions (e.g., "Fact or Fiction: Traditional vs. Gestational"), and slider reactions to success stories.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 bg-gray-50 p-6 rounded-2xl border-l-4 border-brand-cyan items-start">
+                    <div class="bg-white p-4 rounded-full shadow-sm text-2xl">📈</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-gray-800 mb-2">Converting Followers: SEO & Profile Optimization</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Instagram is a search engine. We will use keyword-rich captions (#LGBTQFamilyBuilding, #SurrogacyJourney, #EggDonationProcess) instead of generic tags. Every Reel and Carousel will end with a strong, tailored Call-To-Action (CTA) such as "Save this for your journey," "Share with someone who needs hope," or "Link in bio to book a consultation."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEEP RESEARCH: Daily Engagement Routine -->
+            <h3 class="text-2xl font-bold mb-8 mt-16 border-b-2 border-brand-cyan pb-2 inline-block">The Daily Execution Playbook</h3>
+            <p class="text-gray-600 mb-8 max-w-3xl">A systematic, 365-day engagement strategy targeting your three core pillars: Intended Parents (Domestic & International), Prospective Surrogates, and Egg Donors.</p>
+            
+            <!-- Daily Metrics -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-cyan-50 border border-brand-cyan p-6 rounded-2xl text-center shadow-sm transform transition duration-300 hover:-translate-y-1">
+                    <div class="text-5xl font-extrabold brand-cyan mb-2">10</div>
+                    <div class="font-bold text-gray-800 tracking-wider mb-2">LIKES</div>
+                    <p class="text-sm text-gray-600"><strong>Target:</strong> Fertility Clinics, Reproductive Endocrinologists, & Family Lawyers (B2B Networking).</p>
+                </div>
+                <div class="bg-orange-50 border border-brand-orange p-6 rounded-2xl text-center shadow-sm transform transition duration-300 hover:-translate-y-1">
+                    <div class="text-5xl font-extrabold brand-orange mb-2">5</div>
+                    <div class="font-bold text-gray-800 tracking-wider mb-2">COMMENTS</div>
+                    <p class="text-sm text-gray-600"><strong>Target:</strong> #IVFJourney, Prospective Parents, & Women researching Egg Donation Compensation.</p>
+                </div>
+                <div class="bg-gray-50 border border-gray-200 p-6 rounded-2xl text-center shadow-sm transform transition duration-300 hover:-translate-y-1">
+                    <div class="text-5xl font-extrabold text-gray-400 mb-2">3</div>
+                    <div class="font-bold text-gray-800 tracking-wider mb-2">STORY REPLIES</div>
+                    <p class="text-sm text-gray-600"><strong>Target:</strong> LGBTQ+ Family Creators, International Surrogacy Advocates & Industry Influencers.</p>
+                </div>
+            </div>
+
+            <!-- Target Accounts -->
+            <h4 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-brand-cyan">■</span> Priority Network Targets (To Follow & Engage)</h4>
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div class="font-bold text-gray-800 text-sm mb-1">Fertility Clinics & IVF Docs</div>
+                    <div class="text-xs text-gray-500 mb-2">e.g., @shadygrovefertility, @ccrmfertility, @dr.lorishahine</div>
+                    <div class="text-sm text-brand-orange font-semibold bg-orange-50 inline-block px-3 py-1 rounded-md mt-2">Goal: Agency Referrals</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div class="font-bold text-gray-800 text-sm mb-1">LGBTQ+ & Intended Parents</div>
+                    <div class="text-xs text-gray-500 mb-2">e.g., @gayswithkids, @twodadsworldwide, @menhavingbabies</div>
+                    <div class="text-sm text-brand-cyan font-semibold bg-cyan-50 inline-block px-3 py-1 rounded-md mt-2">Goal: Domestic/Intl IP Trust</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div class="font-bold text-gray-800 text-sm mb-1">Surrogacy & IVF Communities</div>
+                    <div class="text-xs text-gray-500 mb-2">e.g., @fertilityoutloud, @surrogacy_support, #proudsurrogate</div>
+                    <div class="text-sm text-gray-600 font-semibold bg-gray-100 inline-block px-3 py-1 rounded-md mt-2">Goal: Surrogate Recruitment</div>
+                </div>
+            </div>
+
+            <!-- Comment Bank -->
+            <h4 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-brand-orange">■</span> Quick-Reply Comment Bank</h4>
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-4 w-1/3">Scenario / Trigger Post</th>
+                            <th class="px-4 py-4 w-2/3">Strategic Comment & Tone</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-4 font-semibold text-gray-800 align-top">IP asking about overwhelming Surrogacy Costs</td>
+                            <td class="px-4 py-4 text-gray-600">
+                                "Financial transparency is so vital in this journey. We always recommend breaking down the costs step-by-step so there are zero surprises. Happy to share some resources if you need them!" <br>
+                                <span class="text-xs font-bold text-brand-cyan mt-2 block uppercase tracking-wider">Tone: Reassuring / Expert</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-4 font-semibold text-gray-800 align-top">International Couple sharing their family building struggles</td>
+                            <td class="px-4 py-4 text-gray-600">
+                                "Navigating international surrogacy laws can feel daunting, but building families across borders is truly beautiful. Sending you so much love and support from the US! 🌍❤️" <br>
+                                <span class="text-xs font-bold text-brand-orange mt-2 block uppercase tracking-wider">Tone: Welcoming / Global Support</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-4 font-semibold text-gray-800 align-top">Prospective Surrogate sharing a milestone (e.g., Transfer Day)</td>
+                            <td class="px-4 py-4 text-gray-600">
+                                "Wishing you a sticky bean! Thank you for the incredible, selfless gift you are giving. Women like you make miracles happen every day." <br>
+                                <span class="text-xs font-bold text-brand-cyan mt-2 block uppercase tracking-wider">Tone: Grateful / Encouraging</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-4 font-semibold text-gray-800 align-top">Young woman researching Egg Donation Process/Compensation</td>
+                            <td class="px-4 py-4 text-gray-600">
+                                "Saying yes to egg donation changes lives! It's important to choose an agency that prioritizes your medical care and ensures you are compensated fairly for your amazing gift." <br>
+                                <span class="text-xs font-bold text-brand-orange mt-2 block uppercase tracking-wider">Tone: Informative / Empowering</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-4 py-4 font-semibold text-gray-800 align-top">IVF Clinic sharing an educational post on Gestational Surrogacy</td>
+                            <td class="px-4 py-4 text-gray-600">
+                                "Excellent breakdown! Education empowers intended parents to make the best choices. Love seeing this level of clarity in the fertility space." <br>
+                                <span class="text-xs font-bold text-gray-500 mt-2 block uppercase tracking-wider">Tone: Professional / Collaborative</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Steps / CTA -->
+    <section class="py-20 bg-brand-cyan text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-8">Proposed Part-Time Scope</h2>
+            
+            <div class="bg-white/10 p-8 rounded-2xl backdrop-blur-sm mb-8 border border-white/20">
+                <ul class="text-lg space-y-4 font-medium inline-block text-left">
+                    <li class="flex items-center gap-3"><span>✓</span> 3 High-Retention Reels per week</li>
+                    <li class="flex items-center gap-3"><span>✓</span> 2 Educational/Static Posts per week</li>
+                    <li class="flex items-center gap-3"><span>✓</span> 3 Days of Curated Stories</li>
+                    <li class="flex items-center gap-3 text-brand-orange font-bold"><span>✦</span> All repurposed from your existing assets.</li>
+                </ul>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-6">Next Step: 30-Day Pilot Program (Starting April)</h3>
+            <button onclick="alert('In a live environment, this would open a calendar to schedule the official onboarding.')" class="bg-brand-orange hover:bg-orange-500 text-white font-bold py-4 px-10 rounded-full shadow-xl transition duration-300 transform hover:scale-105 text-lg">
+                Let's Build the Engine
+            </button>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <p>Prepared exclusively for Parham Zar by Sheena Lestano • Data-Driven SMM Strategy</p>
+    </footer>
+
+    <!-- Interactive Logic & Data -->
+    <script>
+        // --- 1. Chart.js Implementation for Repurposing Engine ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('repurposeChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Reels (Video)', 'Carousels (Edu)', 'Quotes (Authority)', 'Stories (Engagement)'],
+                    datasets: [{
+                        data: [3, 1, 1, 3],
+                        backgroundColor: [
+                            '#74ccd5', // Cyan
+                            '#f59e4e', // Orange
+                            '#3b82f6', // Blue accent
+                            '#cbd5e1'  // Gray accent
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: { family: 'Inter', size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw} Assets`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initialize Roadmap with Q2
+            renderRoadmap('q2');
+        });
+
+        // --- 2. State Management & Data for Roadmap ---
+        const roadmapData = {
+            q2: {
+                title: "Spring: Awareness & Education",
+                months: [
+                    {
+                        name: "April: National Infertility Awareness Week",
+                        theme: "You are not alone.",
+                        action: "Repurpose content addressing the emotional toll and how surrogacy offers hope. 3 short reels from emotional journey videos. '5 Myths' Carousel."
+                    },
+                    {
+                        name: "May: Mother's Day & Women's Health Month",
+                        theme: "Celebrating all paths to motherhood.",
+                        action: "Repurpose surrogate and intended mother testimonials. Highlight the selflessness of egg donors."
+                    },
+                    {
+                        name: "June: Pride Month & Men's Health Month",
+                        theme: "Love makes a family.",
+                        action: "Repurpose videos addressing the surrogacy process for same-sex couples. Highlight Father's Day for intended fathers."
+                    }
+                ]
+            },
+            q3: {
+                title: "Summer: The Process & Logistics",
+                months: [
+                    {
+                        name: "July: The 'How-To' Month",
+                        theme: "Demystifying the logistics.",
+                        action: "Break down the '$200,000 Surrogacy Question' into bite-sized financial planning reels. Step-by-Step Guide Carousel."
+                    },
+                    {
+                        name: "August: National Family Fun Month",
+                        theme: "The light at the end of the tunnel.",
+                        action: "Focus on success stories. Repurpose text testimonials into animated graphics utilizing brand colors."
+                    },
+                    {
+                        name: "September: PCOS Awareness Month",
+                        theme: "Medical hurdles and Egg Donation.",
+                        action: "Repurpose educational content about why egg donors are needed and the medical qualification process."
+                    }
+                ]
+            },
+            q4: {
+                title: "Fall: Gratitude & Giving",
+                months: [
+                    {
+                        name: "October: Pregnancy/Infant Loss Awareness",
+                        theme: "Sensitivity, hope, and alternative paths.",
+                        action: "Empathetic content. Repurpose audio speaking kindly about loss and the pivot to surrogacy."
+                    },
+                    {
+                        name: "November: National Adoption Month & Thanksgiving",
+                        theme: "Gratitude & Options.",
+                        action: "'Surrogacy vs. Adoption' educational carousel. Thanksgiving campaign thanking surrogates."
+                    },
+                    {
+                        name: "December: The Gift of Family",
+                        theme: "Year-in-review and holiday hope.",
+                        action: "Montage Reel of families created this year. 'Starting your journey in the New Year' posts."
+                    }
+                ]
+            },
+            q1: {
+                title: "Winter: Action & New Beginnings",
+                months: [
+                    {
+                        name: "January: New Year, New Goals",
+                        theme: "Setting the foundation.",
+                        action: "Repurpose 'How to Choose a Surrogacy Agency' videos. High-energy clips encouraging consultation bookings."
+                    },
+                    {
+                        name: "February: Valentine's Day",
+                        theme: "The ultimate act of love.",
+                        action: "Focus on the bond between surrogates and intended parents. Repurpose first-meeting interview clips."
+                    },
+                    {
+                        name: "March: Endometriosis & Women's History Month",
+                        theme: "Celebrating the incredible women involved.",
+                        action: "Educational content on endometriosis. Spotlighting the strength of women in the EDSI program."
+                    }
+                ]
+            }
+        };
+
+        // --- 3. Interaction Logic ---
+        function switchTab(quarter) {
+            // Update active button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-brand-cyan', 'text-white', 'border-brand-cyan');
+                btn.classList.add('text-gray-600', 'border-gray-200');
+            });
+            
+            const activeBtn = document.getElementById(`btn-${quarter}`);
+            activeBtn.classList.add('active', 'bg-brand-cyan', 'text-white', 'border-brand-cyan');
+            activeBtn.classList.remove('text-gray-600', 'border-gray-200');
+
+            // Render Content
+            renderRoadmap(quarter);
+        }
+
+        function renderRoadmap(quarter) {
+            const data = roadmapData[quarter];
+            const container = document.getElementById('roadmap-content');
+            
+            let html = `
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6 border-b-2 border-brand-orange pb-2 inline-block">${data.title}</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+            `;
+
+            data.months.forEach(month => {
+                html += `
+                    <div class="bg-gray-50 border border-gray-100 rounded-xl p-6 hover:shadow-md transition duration-300">
+                        <h4 class="font-bold text-lg brand-cyan mb-2">${month.name}</h4>
+                        <div class="text-sm font-semibold text-brand-orange mb-3">Theme: "${month.theme}"</div>
+                        <p class="text-gray-600 text-sm leading-relaxed">${month.action}</p>
+                    </div>
+                `;
+            });
+
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
